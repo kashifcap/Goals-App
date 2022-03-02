@@ -25,6 +25,11 @@ const updateGoal = asyncHandler(async (req, res) => {
     throw new Error("No goal present!");
   }
 
+  if (!req.user) {
+    res.status(401);
+    throw new Error("No user found");
+  }
+
   if (goal.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
@@ -42,6 +47,12 @@ const deleteGoal = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("No goal present!");
   }
+
+  if (!req.user) {
+    res.status(401);
+    throw new Error("No user found");
+  }
+
   if (goal.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized");
