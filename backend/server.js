@@ -1,7 +1,6 @@
 const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv").config();
-const morgan = require("morgan");
 const colors = require("colors");
 const { errorHandler } = require("./middlewares/errorMiddleware");
 const connectDB = require("./config/db");
@@ -17,6 +16,8 @@ const app = express();
 
 // MiddleWares
 if (process.env.NODE_ENV === "development") {
+  const morgan = require("morgan");
+
   app.use(morgan("tiny"));
 }
 app.use(express.json());
